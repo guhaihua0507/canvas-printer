@@ -3,6 +3,9 @@ package com.ghh.canvas;
 public class Canvas {
     private final int width;
     private final int height;
+    /*
+     * this array store the current state of this canvas
+     */
     private final boolean[][] grid;
 
     public Canvas(int width, int height) {
@@ -17,6 +20,14 @@ public class Canvas {
         grid = new boolean[width][height];
     }
 
+    /**
+     * add a line to this canvas.
+     * mark every grid on this line to true
+     * @param x1
+     * @param y1
+     * @param x2
+     * @param y2
+     */
     private void addLine(int x1, int y1, int x2, int y2) {
         if (x1 <= 0 || x2 <= 0) {
             throw new IllegalArgumentException("x must larger than 0");
@@ -38,7 +49,7 @@ public class Canvas {
         if (x1 == x2) {
             int d = y1 <= y2 ? 1 : -1;
             int y = y1;
-            while(y != y2) {
+            while (y != y2) {
                 grid[x1 - 1][y - 1] = true;
                 y += d;
             }
@@ -46,7 +57,7 @@ public class Canvas {
         } else {        //y1 == y2
             int d = x1 <= x2 ? 1 : -1;
             int x = x1;
-            while(x != x2) {
+            while (x != x2) {
                 grid[x - 1][y1 - 1] = true;
                 x += d;
             }
@@ -67,14 +78,23 @@ public class Canvas {
         print();
     }
 
+    /**
+     * print current state of this canvas
+     */
     public void print() {
-        System.out.println(buildHorizontalBorder());
+        String border = buildHorizontalBorder();
+        System.out.println(border);
         for (int h = 0; h < height; h++) {
             System.out.println(buildHorizonLine(h));
         }
-        System.out.println(buildHorizontalBorder());
+        System.out.println(border);
     }
 
+    /**
+     * build the specified horizon line string
+     * @param h
+     * @return
+     */
     private String buildHorizonLine(int h) {
         StringBuilder line = new StringBuilder();
         line.append("|");
