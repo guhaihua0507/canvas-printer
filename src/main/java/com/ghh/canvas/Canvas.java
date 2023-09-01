@@ -67,7 +67,7 @@ public class Canvas {
 
     public void drawLine(int x1, int y1, int x2, int y2) {
         addLine(x1, y1, x2, y2);
-        print();
+//        print();
     }
 
     public void drawRectangle(int x1, int y1, int x2, int y2) {
@@ -75,7 +75,7 @@ public class Canvas {
         addLine(x1, y1, x2, y1);
         addLine(x2, y2, x2, y1);
         addLine(x2, y2, x1, y2);
-        print();
+//        print();
     }
 
     /**

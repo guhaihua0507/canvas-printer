@@ -32,12 +32,14 @@ public class Main {
                             System.out.println("canvas should be created first");
                         } else {
                             canvas.drawLine(cmd[1], cmd[2], cmd[3], cmd[4]);
+                            canvas.print();
                         }
                     } else if (cmd[0] == 2) {
                         if (canvas == null) {
                             System.out.println("canvas should be created first");
                         } else {
                             canvas.drawRectangle(cmd[1], cmd[2], cmd[3], cmd[4]);
+                            canvas.print();
                         }
                     }
                 } catch (Exception e) {
