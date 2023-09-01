@@ -22,21 +22,26 @@ public class Main {
                 if (cmd == null) {
                     continue;
                 }
-                if (cmd[0] == 0) {
-                    canvas = new Canvas(cmd[1], cmd[2]);
-                    canvas.print();
-                } else if (cmd[0] == 1) {
-                    if (canvas == null) {
-                        System.out.println("canvas should be created first");
-                    } else {
-                        canvas.drawLine(cmd[1], cmd[2], cmd[3], cmd[4]);
+
+                try {
+                    if (cmd[0] == 0) {
+                        canvas = new Canvas(cmd[1], cmd[2]);
+                        canvas.print();
+                    } else if (cmd[0] == 1) {
+                        if (canvas == null) {
+                            System.out.println("canvas should be created first");
+                        } else {
+                            canvas.drawLine(cmd[1], cmd[2], cmd[3], cmd[4]);
+                        }
+                    } else if (cmd[0] == 2) {
+                        if (canvas == null) {
+                            System.out.println("canvas should be created first");
+                        } else {
+                            canvas.drawRectangle(cmd[1], cmd[2], cmd[3], cmd[4]);
+                        }
                     }
-                } else if (cmd[0] == 2) {
-                    if (canvas == null) {
-                        System.out.println("canvas should be created first");
-                    } else {
-                        canvas.drawRectangle(cmd[1], cmd[2], cmd[3], cmd[4]);
-                    }
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
                 }
             }
         }

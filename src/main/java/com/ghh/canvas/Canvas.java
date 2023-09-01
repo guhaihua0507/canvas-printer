@@ -39,7 +39,7 @@ public class Canvas {
             throw new IllegalArgumentException("y must larger than 0");
         }
         if (y1 > height || y2 > height) {
-            throw new IllegalArgumentException("y1 must not larger than " + height);
+            throw new IllegalArgumentException("y must not larger than " + height);
         }
 
         if (x1 != x2 && y1 != y2) {
