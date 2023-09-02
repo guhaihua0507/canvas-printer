@@ -17,30 +17,23 @@ public class CommandParser {
 
         String[] arr = s.trim().split("[ ]+");
 
-        try {
-            if ("C".equals(arr[0])) {    //create new canvas
-                if (arr.length != 3) {
-                    throw new IllegalCommandException("not a valid Create canvas command");
-                }
-                return new CreateCanvasCommand(Integer.parseInt(arr[1]), Integer.parseInt(arr[2]));
-            } else if ("L".equals(arr[0])) {       //draw line
-                if (arr.length != 5) {
-                    throw new IllegalCommandException("not a valid Draw Line command");
-                }
-                return new DrawLineCommand(Integer.parseInt(arr[1]), Integer.parseInt(arr[2]), Integer.parseInt(arr[3]), Integer.parseInt(arr[4]));
-            } else if ("R".equals(arr[0])) {    //draw rectangle
-                if (arr.length != 5) {
-                    throw new IllegalCommandException("not a valid draw rectangle command");
-                }
-                return new DrawRectangleCommand(Integer.parseInt(arr[1]), Integer.parseInt(arr[2]), Integer.parseInt(arr[3]), Integer.parseInt(arr[4]));
-            } else {
-                throw new IllegalCommandException("can not resolve this command: " + s);
+        if ("C".equals(arr[0])) {    //create new canvas
+            if (arr.length != 3) {
+                throw new IllegalCommandException("not a valid Create canvas command");
             }
-        } catch (IllegalCommandException e) {
-            throw e;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return null;
+            return new CreateCanvasCommand(Integer.parseInt(arr[1]), Integer.parseInt(arr[2]));
+        } else if ("L".equals(arr[0])) {       //draw line
+            if (arr.length != 5) {
+                throw new IllegalCommandException("not a valid Draw Line command");
+            }
+            return new DrawLineCommand(Integer.parseInt(arr[1]), Integer.parseInt(arr[2]), Integer.parseInt(arr[3]), Integer.parseInt(arr[4]));
+        } else if ("R".equals(arr[0])) {    //draw rectangle
+            if (arr.length != 5) {
+                throw new IllegalCommandException("not a valid draw rectangle command");
+            }
+            return new DrawRectangleCommand(Integer.parseInt(arr[1]), Integer.parseInt(arr[2]), Integer.parseInt(arr[3]), Integer.parseInt(arr[4]));
+        } else {
+            throw new IllegalCommandException("can not resolve this command: " + s);
         }
     }
 }
