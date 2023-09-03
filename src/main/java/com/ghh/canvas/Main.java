@@ -16,6 +16,7 @@ public class Main {
         printHelp();
 
         while (true) {
+            System.out.print("enter command: ");
             if (in.hasNextLine()) {
                 String line = in.nextLine();
                 if (line == null || line.trim().length() == 0) {
@@ -52,9 +53,8 @@ public class Main {
                     System.out.println(e.getMessage());
                     printHelp();
                 } catch (Exception ex) {
-                    ex.printStackTrace();
+                    ex.printStackTrace(System.out);
                 }
-
             }
         }
     }
