@@ -9,10 +9,15 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 public class Canvas {
-    private static final char DRAW_CHAR = 'x';
-    private static final char V_BORDER_CHAR = '-';
-    private static final char H_BORDER_CHAR = '|';
-    private static final char SPACE = ' ';
+    private static final char DEFAULT_DRAW_CHAR = 'x';
+    private static final char DEFAULT_V_BORDER_CHAR = '-';
+    private static final char DEFAULT_H_BORDER_CHAR = '|';
+    private static final char DEFAULT_SPACE = ' ';
+
+    private char drawChar = DEFAULT_DRAW_CHAR;
+    private char vBorderChar = DEFAULT_V_BORDER_CHAR;
+    private char hBorderChar = DEFAULT_H_BORDER_CHAR;
+    private char space = DEFAULT_SPACE;
 
     private final int width;
     private final int height;
@@ -32,12 +37,14 @@ public class Canvas {
      */
     private Deque<CanvasCommand> commands = new ArrayDeque<>();
 
-    public Canvas(int width, int height, PrintStream out) {
+    private Canvas(int width, int height, PrintStream out) {
         this(width, height);
-        this.out = out;
+        if (out != null) {
+            this.out = out;
+        }
     }
 
-    public Canvas(int width, int height) {
+    private Canvas(int width, int height) {
         if (width <= 0) {
             throw new IllegalArgumentException("width must be larger than 0");
         }
@@ -140,22 +147,22 @@ public class Canvas {
      */
     private String buildHorizonLine(int h) {
         StringBuilder line = new StringBuilder();
-        line.append(H_BORDER_CHAR);
+        line.append(hBorderChar);
         for (int i = 0; i < width; i++) {
             if (grid[i][h] > 0) {
-                line.append(DRAW_CHAR);
+                line.append(drawChar);
             } else {
-                line.append(SPACE);
+                line.append(space);
             }
         }
-        line.append(H_BORDER_CHAR);
+        line.append(hBorderChar);
         return line.toString();
     }
 
     private String buildHorizontalBorder() {
         StringBuilder line = new StringBuilder();
         for (int i = 0; i < width + 2; i++) {
-            line.append(V_BORDER_CHAR);
+            line.append(vBorderChar);
         }
         return line.toString();
     }
@@ -172,6 +179,87 @@ public class Canvas {
         }
         if (y > height) {
             throw new IllegalArgumentException("y must not larger than " + height);
+        }
+    }
+
+    private void setDrawChar(char drawChar) {
+        this.drawChar = drawChar;
+    }
+
+    private void setVBorderChar(char vBorderChar) {
+        this.vBorderChar = vBorderChar;
+    }
+
+    private void setHBorderChar(char hBorderChar) {
+        this.hBorderChar = hBorderChar;
+    }
+
+    private void setSpace(char space) {
+        this.space = space;
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private Integer width = null;
+        private Integer height = null;
+        private Character drawChar = null;
+        private Character vBorderChar = null;
+        private Character hBorderChar = null;
+        private Character space = null;
+        private PrintStream out = null;
+
+        public Builder size(int width, int height) {
+            this.width = width;
+            this.height = height;
+            return this;
+        }
+
+        public Builder drawChar(char drawChar) {
+            this.drawChar = drawChar;
+            return this;
+        }
+
+        public Builder vBorderChar(char vBorderChar) {
+            this.vBorderChar = vBorderChar;
+            return this;
+        }
+
+        public Builder hBorderChar(char hBorderChar) {
+            this.hBorderChar = hBorderChar;
+            return this;
+        }
+
+        public Builder space(char space) {
+            this.space = space;
+            return this;
+        }
+
+        public Builder printStream(PrintStream out) {
+            this.out = out;
+            return this;
+        }
+
+        public Canvas build() {
+            if (width == null || height == null) {
+                throw new IllegalStateException("canvas size not specified");
+            }
+            Canvas canvas = new Canvas(width, height, out);
+            if (drawChar != null) {
+                canvas.setDrawChar(drawChar);
+            }
+            if(vBorderChar != null) {
+                canvas.setVBorderChar(vBorderChar);
+            }
+            if (hBorderChar != null) {
+                canvas.setHBorderChar(hBorderChar);
+            }
+            if (space != null) {
+                canvas.setSpace(space);
+            }
+            return canvas;
         }
     }
 }

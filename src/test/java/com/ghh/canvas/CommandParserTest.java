@@ -1,8 +1,8 @@
 package com.ghh.canvas;
 
 import com.ghh.canvas.cmd.Command;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class CommandParserTest {
 
@@ -37,12 +37,8 @@ public class CommandParserTest {
     @Test
     public void testUnresolvedCmd() {
         CommandParser parser = new CommandParser();
-        Command command = null;
-        try {
-            command = parser.parseCommand("A 1 2 3 4");
-        } catch (IllegalCommandException e) {
-            e.printStackTrace();
-        }
-        Assert.assertNull(command);
+        Assertions.assertThrows(IllegalCommandException.class, () -> {
+            parser.parseCommand("A 1 2 3 4");
+        });
     }
 }

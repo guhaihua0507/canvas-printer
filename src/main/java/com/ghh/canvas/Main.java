@@ -37,7 +37,7 @@ public class Main {
                         return;
                     } else if (command instanceof CreateCanvasCommand) {
                         CreateCanvasCommand ccc = (CreateCanvasCommand) command;
-                        canvas = new Canvas(ccc.getWidth(), ccc.getHeight());
+                        canvas = Canvas.builder().size(ccc.getWidth(), ccc.getHeight()).build();
                         canvas.print();
                     } else if (command instanceof CanvasCommand) {
                         if (canvas == null) {

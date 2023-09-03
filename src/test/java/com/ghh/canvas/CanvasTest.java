@@ -2,19 +2,20 @@ package com.ghh.canvas;
 
 import com.ghh.canvas.cmd.DrawLineCommand;
 import com.ghh.canvas.cmd.DrawRectangleCommand;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class CanvasTest {
 
     @Test
     public void testNewCanvas() {
-        Canvas canvas = new Canvas(20, 8);
+        Canvas canvas = Canvas.builder().size(20, 8).build();
         canvas.print();
     }
 
     @Test
     public void testDrawLine() {
-        Canvas canvas = new Canvas(20, 8);
+        Canvas canvas = Canvas.builder().size(20, 8).build();
         canvas.drawLine(new DrawLineCommand(1, 2, 6, 2));
         canvas.print();
 
@@ -22,40 +23,37 @@ public class CanvasTest {
         canvas.print();
 
         //out of the border
-        try {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
             canvas.drawLine(new DrawLineCommand(1, 5, 1, 10));
-            canvas.print();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        });
 
         //only horizontal or vertical lines are supported
-        try {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
             canvas.drawLine(new DrawLineCommand(1, 2, 4, 5));
-            canvas.print();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        });
     }
 
     @Test
     public void testDrawRectangle() {
-        Canvas canvas = new Canvas(20, 8, System.out);
+        Canvas canvas = Canvas.builder().size(20, 8).build();
         canvas.drawRectangle(new DrawRectangleCommand(16, 1, 20, 3));
         canvas.print();
 
         //(x1, y1) should be less than or equal to (x2,y2)
-        try {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
             canvas.drawRectangle(new DrawRectangleCommand(4, 5, 1, 2));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        });
 
         //out of border
-        try {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
             canvas.drawRectangle(new DrawRectangleCommand(2, 5, 10, 10));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        });
+    }
+
+    @Test
+    public void testBuildCanvas() {
+        Canvas canvas = Canvas.builder().size(20, 10).drawChar('x').vBorderChar('*').hBorderChar('*').space('.').build();
+        canvas.drawRectangle(new DrawRectangleCommand(1, 1, 5,5));
+        canvas.print();
     }
 }
