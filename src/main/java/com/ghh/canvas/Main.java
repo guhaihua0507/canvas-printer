@@ -3,7 +3,6 @@ package com.ghh.canvas;
 import com.ghh.canvas.cmd.CanvasCommand;
 import com.ghh.canvas.cmd.Command;
 import com.ghh.canvas.cmd.CreateCanvasCommand;
-import com.ghh.canvas.cmd.QuitCommand;
 
 import java.util.Scanner;
 

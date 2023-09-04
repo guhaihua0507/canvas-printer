@@ -250,7 +250,7 @@ public class Canvas {
             if (drawChar != null) {
                 canvas.setDrawChar(drawChar);
             }
-            if(vBorderChar != null) {
+            if (vBorderChar != null) {
                 canvas.setVBorderChar(vBorderChar);
             }
             if (hBorderChar != null) {
