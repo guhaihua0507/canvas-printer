@@ -142,7 +142,7 @@ public class Canvas {
     /**
      * build the specified horizon line string
      *
-     * @param h the index of horizontal line (start with 1)
+     * @param h the index of horizontal line
      * @return
      */
     private String buildHorizonLine(int h) {
