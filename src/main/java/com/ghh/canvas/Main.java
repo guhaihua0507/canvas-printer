@@ -30,13 +30,15 @@ public class Main {
                     continue;
                 }
 
+                if ("Q".equalsIgnoreCase(line)) {
+                    System.out.println("Bye!!");
+                    return;
+                }
+
                 try {
                     Command command = commandParser.parseCommand(line);
 
-                    if (command instanceof QuitCommand) {
-                        System.out.println("Bye!!");
-                        return;
-                    } else if (command instanceof CreateCanvasCommand) {
+                    if (command instanceof CreateCanvasCommand) {
                         CreateCanvasCommand ccc = (CreateCanvasCommand) command;
                         canvas = Canvas.builder().size(ccc.getWidth(), ccc.getHeight()).build();
                         canvas.print();
