@@ -4,15 +4,11 @@ import com.ghh.canvas.cmd.Command;
 import com.ghh.canvas.cmd.CreateCanvasCommand;
 import com.ghh.canvas.cmd.DrawLineCommand;
 import com.ghh.canvas.cmd.DrawRectangleCommand;
-import com.ghh.canvas.cmd.QuitCommand;
 
 public class CommandParser {
     public Command parseCommand(String s) throws IllegalCommandException {
         if (s == null || s.trim().length() == 0) {
             return null;
-        }
-        if ("Q".equals(s)) {
-            return new QuitCommand();
         }
 
         String[] arr = s.trim().split("[ ]+");

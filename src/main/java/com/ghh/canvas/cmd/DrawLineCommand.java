@@ -3,8 +3,8 @@ package com.ghh.canvas.cmd;
 import com.ghh.canvas.Canvas;
 
 public class DrawLineCommand implements CanvasCommand {
-    private int[] point1;
-    private int[] point2;
+    private final int[] point1;
+    private final int[] point2;
 
     public DrawLineCommand(int x1, int y1, int x2, int y2) {
         point1 = new int[]{x1, y1};

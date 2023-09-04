@@ -35,7 +35,7 @@ public class Canvas {
      * commands stack.
      * can be used to rollback draw commands
      */
-    private Deque<CanvasCommand> commands = new ArrayDeque<>();
+    private final Deque<CanvasCommand> commands = new ArrayDeque<>();
 
     private Canvas(int width, int height, PrintStream out) {
         this(width, height);
@@ -64,10 +64,10 @@ public class Canvas {
      * add a line to this canvas.
      * mark every grid on this line to true
      *
-     * @param x1
-     * @param y1
-     * @param x2
-     * @param y2
+     * @param x1 x of point 1
+     * @param y1 y of point 1
+     * @param x2 x of point 2
+     * @param y2 y of point 2
      */
     private void addLine(int x1, int y1, int x2, int y2) {
         validateDrawPoint(x1, y1);
@@ -142,7 +142,7 @@ public class Canvas {
     /**
      * build the specified horizon line string
      *
-     * @param h
+     * @param h the index of horizontal line (start with 1)
      * @return
      */
     private String buildHorizonLine(int h) {

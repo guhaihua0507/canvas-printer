@@ -1,8 +1,8 @@
 package com.ghh.canvas.cmd;
 
 public class CreateCanvasCommand implements Command {
-    private int width;
-    private int height;
+    private final int width;
+    private final int height;
 
     public CreateCanvasCommand(int width, int height) {
         this.width = width;
