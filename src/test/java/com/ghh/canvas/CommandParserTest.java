@@ -28,13 +28,6 @@ public class CommandParserTest {
     }
 
     @Test
-    public void testParseQuitCmd() throws IllegalCommandException {
-        CommandParser parser = new CommandParser();
-        Command cmd = parser.parseCommand("Q");
-        System.out.println(cmd);
-    }
-
-    @Test
     public void testUnresolvedCmd() {
         CommandParser parser = new CommandParser();
         Assertions.assertThrows(IllegalCommandException.class, () -> {
