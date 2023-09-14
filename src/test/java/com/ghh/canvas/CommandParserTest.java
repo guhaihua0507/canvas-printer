@@ -34,4 +34,34 @@ public class CommandParserTest {
             parser.parseCommand("A 1 2 3 4");
         });
     }
+
+
+    //----more test case---
+    @Test
+    public void testIllegalCmd() {
+        CommandParser parser = new CommandParser();
+        Assertions.assertThrows(IllegalCommandException.class, () -> {
+            parser.parseCommand("C 100");
+        });
+
+        Assertions.assertThrows(NumberFormatException.class, () -> {
+            parser.parseCommand("C 100 b");
+        });
+
+        Assertions.assertThrows(IllegalCommandException.class, () -> {
+            parser.parseCommand("L 1 1 100");
+        });
+
+        Assertions.assertThrows(NumberFormatException.class, () -> {
+            parser.parseCommand("L 1 1 100 a");
+        });
+
+        Assertions.assertThrows(IllegalCommandException.class, () -> {
+            parser.parseCommand("R 1 1 100 100 3");
+        });
+
+        Assertions.assertThrows(NumberFormatException.class, () -> {
+            parser.parseCommand("R 1 1 100 100a");
+        });
+    }
 }
